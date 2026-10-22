@@ -1,132 +1,342 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IoT Experiments</title>
+  <title>IOT Experiments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:wght@100..900&family=Poppins:wght@300;400;500;600&family=Raleway:wght@300..700&display=swap" rel="stylesheet">
   <style>
+    :root,
+    html[data-theme="light"] {
+      --color-fill: 224, 224, 224;
+      --color-text-base: 20, 20, 20;
+      --color-accent: 100, 100, 100;
+      --color-card: 190, 190, 190;
+      --color-card-muted: 205, 205, 205;
+      --color-border: 200, 200, 200;
+    }
+
+    html[data-theme="dark"] {
+      --color-fill: 30, 30, 30;
+      --color-text-base: 240, 240, 240;
+      --color-accent: 240, 240, 240;
+      --color-card: 0, 0, 0;
+      --color-card-muted: 80, 80, 80;
+      --color-border: 100, 100, 100;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      font-family: 'Figtree', 'Raleway', 'Poppins', 'Inter', Arial, sans-serif;
+      line-height: 1.5;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #121212;
-      color: #e0e0e0;
+      margin: 0;
+      min-height: 100svh;
+      background-color: rgb(var(--color-fill));
+      color: rgb(var(--color-text-base));
+      font-family: 'Figtree', 'Raleway', 'Poppins', 'Inter', Arial, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 300;
+      line-height: 1.75rem;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 24px;
+      transition: background-color 0.15s ease, color 0.15s ease;
     }
+
+    body ::selection,
+    body::selection {
+      background-color: rgba(var(--color-accent), 0.7);
+      color: rgb(var(--color-fill));
+    }
+
+    ::-webkit-scrollbar {
+      width: 0.75rem;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: rgb(var(--color-fill));
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: rgb(var(--color-card));
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgb(var(--color-card-muted));
+    }
+
+    header,
+    main,
+    footer {
+      width: 100%;
+      max-width: 48rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .top-nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(var(--color-border), 0.4);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 500;
+      line-height: 2.25rem;
+      letter-spacing: 0.01em;
+    }
+
+    @media (min-width: 640px) {
+      h1 {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+      }
+    }
+
+    #theme-btn {
+      background: transparent;
+      border: none;
+      padding: 0.35rem;
+      cursor: pointer;
+      color: rgb(var(--color-text-base));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      outline-offset: 2px;
+    }
+
+    #theme-btn:focus-visible {
+      outline: 2px dashed rgb(var(--color-accent));
+    }
+
+    #theme-btn svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      fill: rgb(var(--color-text-base));
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), fill 0.15s ease;
+    }
+
+    #theme-btn:hover svg {
+      transform: rotate(12deg);
+      fill: rgb(var(--color-accent));
+    }
+
+    #sun-svg,
+    html[data-theme="dark"] #moon-svg {
+      display: none;
+    }
+
+    #moon-svg,
+    html[data-theme="dark"] #sun-svg {
+      display: block;
+    }
+
+    main {
+      padding-top: 1rem;
+      padding-bottom: 3rem;
+    }
+
+    .experiment-list {
+      display: flex;
+      flex-direction: column;
+    }
+
     .experiment-item {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 8px;
-      background-color: #1e1e1e;
-      border: 1px solid #2e2e2e;
-      border-radius: 8px;
-      padding: 16px 20px;
-      width: 100%;
-      max-width: 800px;
-      box-sizing: border-box;
+      gap: 1rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid rgba(var(--color-border), 0.35);
     }
+
+    .experiment-item:last-child {
+      border-bottom: none;
+    }
+
     .experiment-label {
       margin: 0;
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: 1.075rem;
+      font-weight: 300;
+      line-height: 1.75rem;
       white-space: pre-line;
-      color: #f0f0f0;
+      color: rgb(var(--color-text-base));
     }
+
     a.download-btn {
       text-decoration: none;
+      display: inline-block;
+      outline-offset: 2px;
     }
-    button {
-      padding: 10px 18px;
-      font-size: 15px;
+
+    a.download-btn:focus-visible {
+      outline: 2px dashed rgb(var(--color-accent));
+    }
+
+    button.ino-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.6rem 1.1rem;
       cursor: pointer;
-      background-color: #2d2d2d;
-      color: #ffffff;
-      border: 1px solid #444444;
-      border-radius: 6px;
-      transition: background-color 0.2s, border-color 0.2s;
+      background-color: rgba(var(--color-card), 0.75);
+      color: rgb(var(--color-text-base));
+      border: 1px solid rgba(var(--color-border), 0.6);
+      border-radius: 0.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    button:hover {
-      background-color: #3d3d3d;
-      border-color: #666666;
+
+    button.ino-btn:hover {
+      background-color: rgba(var(--color-card-muted), 0.45);
+      border-color: rgb(var(--color-accent));
+      transform: translateY(-1px);
     }
-    h1 {
-      margin: 0 0 8px 0;
-      font-size: 28px;
-      color: #ffffff;
+
+    button.ino-btn svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    footer {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      padding-bottom: 3rem;
+      border-top: 1px solid rgba(var(--color-border), 0.35);
+      font-size: 0.95rem;
+      opacity: 0.75;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
   </style>
 </head>
 <body>
-  <h1>IOT Experiments</h1>
+  <header>
+    <div class="top-nav-wrap">
+      <h1>IOT Experiments</h1>
+      <button id="theme-btn" type="button" title="Toggle light & dark theme" aria-label="Toggle theme">
+        <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" viewBox="0 0 24 24">
+          <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" viewBox="0 0 24 24">
+          <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
 
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  3: Light Intensity Measurement using LDR and NodeMCU
+  <main id="main-content">
+    <div class="experiment-list">
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  3: Light Intensity Measurement using LDR and NodeMCU
 
 IoTExp3LightIntensity:</p>
-    <a class="download-btn" href="asset/iotexp3.ino" download="iotexp3.ino">
-      <button type="button">IoT Experiment 3  iotexp3.ino file</button>
-    </a>
-  </div>
+        <a class="download-btn" href="asset/iotexp3.ino" download="iotexp3.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 3  iotexp3.ino file
+          </button>
+        </a>
+      </div>
 
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  4: To Upload DHT11 Temperature and Humidity Sensor Data on Arduino IDE App Using NodeMCU
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  4: To Upload DHT11 Temperature and Humidity Sensor Data on Arduino IDE App Using NodeMCU
 
 IoTExp4TemperatureAndHumidity:</p>
-    <a class="download-btn" href="asset/iotexp4.ino" download="iotexp4.ino">
-      <button type="button">IoT Experiment 4  iotexp4.ino file</button>
-    </a>
-  </div>
+        <a class="download-btn" href="asset/iotexp4.ino" download="iotexp4.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 4  iotexp4.ino file
+          </button>
+        </a>
+      </div>
 
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  5: To Upload Light Intensity Sensor Data using LDR, NodeMCU and Wireless Communication Protocol
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  5: To Upload Light Intensity Sensor Data using LDR, NodeMCU and Wireless Communication Protocol
 
 iotExp5LDRwNodeMCU:</p>
-    <a class="download-btn" href="asset/iotexp5.ino" download="iotexp5.ino">
-      <button type="button">IoT Experiment 5  iotexp5.ino file</button>
-    </a>
-  </div>
+        <a class="download-btn" href="asset/iotexp5.ino" download="iotexp5.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 5  iotexp5.ino file
+          </button>
+        </a>
+      </div>
 
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  6: To design and implement a Smart Traffic Signal using NodeMCU ESP8266 and Blynk IoT, where a single button in the Blynk mobile application starts and stops the automatic traffic light sequence using Red, Yellow, and Green LEDs.
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  6: To design and implement a Smart Traffic Signal using NodeMCU ESP8266 and Blynk IoT, where a single button in the Blynk mobile application starts and stops the automatic traffic light sequence using Red, Yellow, and Green LEDs.
 
 iotexp61tempLEDONOFF:</p>
-    <a class="download-btn" href="asset/iotexp6.ino" download="iotexp6.ino">
-      <button type="button">IoT Experiment 6  iotexp6.ino file</button>
-    </a>
-  </div>
+        <a class="download-btn" href="asset/iotexp6.ino" download="iotexp6.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 6  iotexp6.ino file
+          </button>
+        </a>
+      </div>
 
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  7: To interface the DHT22 temperature and humidity sensor with the NodeMCU ESP8266 and upload
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  7: To interface the DHT22 temperature and humidity sensor with the NodeMCU ESP8266 and upload
 
 IotExp7TemperatureAndHumidity:</p>
-    <a class="download-btn" href="asset/iotexp7.ino" download="iotexp7.ino">
-      <button type="button">IoT Experiment 7  iotexp7.ino file</button>
-    </a>
-  </div>
+        <a class="download-btn" href="asset/iotexp7.ino" download="iotexp7.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 7  iotexp7.ino file
+          </button>
+        </a>
+      </div>
 
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  8: To interface a DHT11/DHT22 temperature and humidity sensor with an Arduino UNO and ESP8266 Wi-Fi module and upload the sensor data to the ThingSpeak cloud platform for real-time monitoring
-
-DHT22 Temperature and Humidity:</p>
-    <a class="download-btn" href="asset/iotexp8.ino" download="iotexp8.ino">
-      <button type="button">IoT Experiment 8  iotexp8.ino file</button>
-    </a>
-  </div>
-
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  9: To interface the DHT22 temperature and humidity sensor with an Arduino UNO and ESP8266 Wi-Fi module and upload the sensor data to the ThingSpeak cloud platform for real-time monitoring.
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  8: To interface a DHT11/DHT22 temperature and humidity sensor with an Arduino UNO and ESP8266 Wi-Fi module and upload the sensor data to the ThingSpeak cloud platform for real-time monitoring
 
 DHT22 Temperature and Humidity:</p>
-    <a class="download-btn" href="asset/iotexp9.ino" download="iotexp9.ino">
-      <button type="button">IoT Experiment 9  iotexp9.ino file</button>
-    </a>
-  </div>
+        <a class="download-btn" href="asset/iotexp8.ino" download="iotexp8.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 8  iotexp8.ino file
+          </button>
+        </a>
+      </div>
 
-  <div class="experiment-item">
-    <p class="experiment-label">Experiment No  10: To implement the Publish–Subscribe communication model using the MQTT protocol by transmitting DHT11 temperature and humidity sensor data through a NodeMCU ESP8266.
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  9: To interface the DHT22 temperature and humidity sensor with an Arduino UNO and ESP8266 Wi-Fi module and upload the sensor data to the ThingSpeak cloud platform for real-time monitoring.
+
+DHT22 Temperature and Humidity:</p>
+        <a class="download-btn" href="asset/iotexp9.ino" download="iotexp9.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 9  iotexp9.ino file
+          </button>
+        </a>
+      </div>
+
+      <div class="experiment-item">
+        <p class="experiment-label">Experiment No  10: To implement the Publish–Subscribe communication model using the MQTT protocol by transmitting DHT11 temperature and humidity sensor data through a NodeMCU ESP8266.
 
 URL : 61156311cd4246998b465fd5b819e511.s1.eu.hivemq.cloud
 Username : Test123
@@ -134,9 +344,28 @@ Password : Test@123
 Topics : student
 
 IoTExp10MQTT:</p>
-    <a class="download-btn" href="asset/iotexp10.ino" download="iotexp10.ino">
-      <button type="button">IoT Experiment 10  iotexp10.ino file</button>
-    </a>
-  </div>
+        <a class="download-btn" href="asset/iotexp10.ino" download="iotexp10.ino">
+          <button class="ino-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            IoT Experiment 10  iotexp10.ino file
+          </button>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>IOT Experiments</span>
+    <span>Arduino / NodeMCU ESP8266</span>
+  </footer>
+
+  <script>
+    const themeBtn = document.getElementById('theme-btn');
+    const htmlEl = document.documentElement;
+    themeBtn.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      htmlEl.setAttribute('data-theme', current);
+    });
+  </script>
 </body>
 </html>
