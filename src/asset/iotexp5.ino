@@ -8,8 +8,8 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
-char ssid[] = "YOUR_WIFI_NAME";
-char pass[] = "YOUR_WIFI_PASSWORD";
+char ssid[] = "RCOE-202";
+char pass[] = "rcoe1234";
 
 int LDR = A0;
 

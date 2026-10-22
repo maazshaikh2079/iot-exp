@@ -9,8 +9,8 @@
 #include <BlynkSimpleEsp8266.h>
 #include <DHT.h>
 
-char ssid[] = "Your_WiFi_Name";
-char pass[] = "Your_WiFi_Password";
+char ssid[] = "RCOE-202";
+char pass[] = "rcoe1234";
 
 #define DHTPIN D5
 #define DHTTYPE DHT11

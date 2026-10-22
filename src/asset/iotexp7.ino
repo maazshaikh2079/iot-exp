@@ -10,8 +10,8 @@
 #include <DHT.h>
 
 // WiFi credentials
-char ssid[] = "YOUR_WIFI_NAME";
-char pass[] = "YOUR_WIFI_PASSWORD";
+char ssid[] = "RCOE-202";
+char pass[] = "rcoe1234";
 
 // DHT22 settings
 #define DHTPIN D2

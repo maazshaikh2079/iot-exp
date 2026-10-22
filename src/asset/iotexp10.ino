@@ -13,8 +13,8 @@
 // =============================
 // Wi-Fi
 // =============================
-const char* ssid = "YOUR_WIFI_NAME";
-const char* password = "YOUR_WIFI_PASSWORD";
+const char* ssid = "RCOE-202";
+const char* password = "rcoe1234";
 
 // =============================
 // HiveMQ Cloud
