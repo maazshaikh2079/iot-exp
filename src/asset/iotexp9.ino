@@ -527,4 +527,53 @@ Humidity    = 59.30 %
 Sending data to ThingSpeak
 ================================
 ThingSpeak update successful!
+
+-----------------------------------------------------
+Hardware Required:
+- Arduino UNO
+- ESP8266 Wi-Fi Module (ESP-01 / ESP-12E)
+- DHT22 Temperature and Humidity Sensor
+- Resistors for Voltage Divider (on Arduino D11 TX -> ESP8266 RX)
+- Breadboard
+- Jumper Wires
+- USB Cable
+- 3.3 V Power Supply (for ESP8266)
+
+Software Required:
+- Arduino IDE
+- ThingSpeak Account
+- DHT Sensor Library
+- SoftwareSerial Library
+
+Circuit Connections:
+1) DHT22 to Arduino UNO:
+DHT22 Pin       Arduino UNO Pin
+-------------------------------
+VCC             5 V
+GND             GND
+DATA            D2
+
+2) ESP8266 to Arduino UNO:
+ESP8266 Pin     Arduino UNO Pin
+--------------------------------------------------
+VCC             3.3 V
+GND             GND
+TX              D10 (RX)
+RX              D11 (TX) (through voltage divider)
+CH_PD / EN      3.3 V
+
+ThingSpeak Fields:
+- Field 1: Temperature
+- Field 2: Humidity
+
+Procedure:
+1. Create a ThingSpeak account and a new channel (DHT22 Temperature and Humidity, Channel ID: 3545156).
+2. Create Field 1 for Temperature and Field 2 for Humidity.
+3. Copy the Write API Key (92GO4BH3TFPNRTO5).
+4. Connect the DHT22 sensor (D2) and ESP8266 module (TX->D10, RX->D11 through voltage divider) to the Arduino UNO.
+5. Install the DHT and SoftwareSerial libraries in the Arduino IDE.
+6. Enter the Wi-Fi credentials and ThingSpeak Write API Key in the program.
+7. Compile and upload the program to the Arduino UNO.
+8. Open the Serial Monitor (9600 baud) to verify sensor readings and Wi-Fi connection.
+9. Log in to ThingSpeak and observe the real-time temperature and humidity graphs (updated every 20 seconds).
 */

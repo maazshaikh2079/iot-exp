@@ -83,4 +83,41 @@ Data sent to Blynk
 Temperature: 28.50 C | Humidity: 61.00 %
 Data sent to Blynk
 --------------------
+
+-----------------------------------------------------
+Hardware Required:
+- NodeMCU ESP8266
+- DHT11 Temperature and Humidity Sensor
+- Breadboard
+- Jumper Wires
+- USB Cable
+- Wi-Fi Connection
+
+Software Required:
+- Arduino IDE
+- Blynk IoT Mobile App / Web Dashboard
+- Blynk Library
+- DHT Sensor Library
+- ESP8266 Board Package
+
+Circuit Connections:
+DHT11 Pin       NodeMCU Pin
+---------------------------
+VCC             3.3 V / 5 V (VIN)
+GND             GND
+DATA            D5 (GPIO14)
+
+Blynk Datastreams:
+- V0: Temperature
+- V1: Humidity
+
+Procedure:
+1. Connect the DHT11 sensor to the NodeMCU as per the circuit connections table (DATA to D5).
+2. Install the Blynk, DHT sensor library, and ESP8266 board package in the Arduino IDE.
+3. Create a template (IoTExp4TemperatureAndHumidity) and virtual pin datastreams (V0 for Temperature, V1 for Humidity) in the Blynk Cloud.
+4. Obtain the Blynk Template ID, Template Name, and Authentication Token.
+5. Enter the Wi-Fi SSID, password, and Blynk credentials in the program.
+6. Compile and upload the program to the NodeMCU.
+7. Open the Serial Monitor (9600 baud) and the Blynk App/Dashboard.
+8. Observe the real-time temperature and humidity values on the Serial Monitor and Blynk dashboard.
 */

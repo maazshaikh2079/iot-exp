@@ -199,4 +199,44 @@ Humidity: 61.00 %
 MQTT Publish Successful!
 Topic: student
 Message: {"temperature":28.20,"humidity":61.00}
+
+-----------------------------------------------------
+Hardware Required:
+- NodeMCU ESP8266
+- DHT11 Temperature and Humidity Sensor
+- Breadboard
+- Jumper Wires
+- USB Cable
+- Wi-Fi Connection
+
+Software Required:
+- Arduino IDE
+- PubSubClient Library
+- DHT Sensor Library
+- MQTT Broker (Mosquitto / HiveMQ Cloud)
+- MQTT Client (MQTT Explorer / MQTTX / HiveMQ Web Client)
+
+Circuit Connections:
+DHT11 Pin       NodeMCU Pin
+---------------------------
+VCC             3.3 V
+GND             GND
+DATA            D4 (GPIO2)
+
+MQTT Configuration:
+- Broker URL: 61156311cd4246998b465fd5b819e511.s1.eu.hivemq.cloud
+- TLS Port: 8883
+- Username: Test123
+- Password: Test@123
+- Topic: student
+
+Procedure:
+1. Connect the DHT11 sensor to the NodeMCU (VCC to 3.3 V, GND to GND, DATA to D4/GPIO2).
+2. Install the PubSubClient and DHT libraries in the Arduino IDE.
+3. Configure the Wi-Fi SSID, password, and HiveMQ Cloud MQTT broker address, credentials, and topic in the program.
+4. Create/use the MQTT topic ("student") for publishing temperature and humidity JSON payloads.
+5. Compile and upload the program to the NodeMCU.
+6. Connect the NodeMCU to the Wi-Fi network and MQTT broker (verify via Serial Monitor at 115200 baud).
+7. Open an MQTT client (HiveMQ Web Client, MQTT Explorer, or MQTTX) and subscribe to the configured topic ("student").
+8. Observe the published temperature and humidity JSON data in real time every 5 seconds.
 */
