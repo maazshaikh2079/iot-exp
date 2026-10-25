@@ -70,3 +70,17 @@ void loop()
   Blynk.run();
   timer.run();
 }
+
+/*
+Expected Output:
+ESP8266 Starting...
+Initializing DHT11...
+Connecting to Blynk...
+Blynk connected!
+Temperature: 28.40 C | Humidity: 62.00 %
+Data sent to Blynk
+--------------------
+Temperature: 28.50 C | Humidity: 61.00 %
+Data sent to Blynk
+--------------------
+*/

@@ -186,3 +186,17 @@ void loop()
 
   delay(5000);
 }
+
+/*
+Expected Output:
+Connecting to Wi-Fi......
+Wi-Fi connected
+IP Address: 192.168.1.105
+Connecting to HiveMQ Cloud...CONNECTED!
+-------------------------
+Temperature: 28.20 C
+Humidity: 61.00 %
+MQTT Publish Successful!
+Topic: student
+Message: {"temperature":28.20,"humidity":61.00}
+*/

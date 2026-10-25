@@ -67,3 +67,12 @@ void loop()
   Blynk.run();
   timer.run();
 }
+
+/*
+Expected Output:
+Temperature: 27.80 C
+Humidity: 58.40 %
+Temperature: 27.90 C
+Humidity: 58.20 %
+(Temperature and Humidity values are uploaded to Blynk Virtual Pins V0 and V1 every 2 seconds)
+*/

@@ -112,3 +112,17 @@ void loop()
     }
   }
 }
+
+/*
+Expected Output:
+When Blynk Button (V0) is pressed ON (1):
+RED
+YELLOW
+GREEN
+RED
+YELLOW
+GREEN
+
+When Blynk Button (V0) is pressed OFF (0):
+TRAFFIC STOPPED
+*/

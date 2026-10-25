@@ -41,3 +41,11 @@ void loop()
   Blynk.run();
   timer.run();
 }
+
+/*
+Expected Output:
+Light Intensity: 145
+Light Intensity: 382
+Light Intensity: 765
+(Values are continuously sent to Blynk Virtual Pin V0 every 2 seconds)
+*/

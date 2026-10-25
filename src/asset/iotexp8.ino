@@ -521,3 +521,37 @@ void loop()
     );
   }
 }
+
+/*
+Expected Output:
+======================================
+ DHT11 + Arduino UNO + ESP8266-12E
+ ThingSpeak IoT Temperature Monitor
+======================================
+
+================================
+Initializing ESP8266-12E
+================================
+>> AT
+OK
+ESP8266 initialized.
+
+================================
+Connecting to Wi-Fi
+================================
+>> AT+CWJAP="RCOE-202","rcoe1234"
+WIFI CONNECTED
+WIFI GOT IP
+OK
+Wi-Fi connected!
+
+======================================
+Temperature = 28.0 C
+Humidity = 60.0 %
+======================================
+
+================================
+Sending data to ThingSpeak
+================================
+ThingSpeak update successful!
+*/
